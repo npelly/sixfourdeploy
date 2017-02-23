@@ -27,3 +27,4 @@ CHANGELOG
     - Ongoing notification when enabled.
     - Hole punching for NAT / public networks.
     - AVD / Android Studio integration.
+    - Encryption / shared secrets.
