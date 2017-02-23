@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:id="@+id/main_text"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="72sp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:clickable="true"
+        app:fabSize="normal"
+        app:elevation="8dp"
+        android:layout_gravity="end"
+        app:backgroundTint="@android:color/holo_red_dark"
+        android:id="@+id/fab" />
+
+    <ScrollView
+        android:id="@+id/debug_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/debug_text"
+            android:textIsSelectable="true"
+            android:textColor="?android:attr/textColorSecondary" />
+    </ScrollView>
+
+</LinearLayout>
