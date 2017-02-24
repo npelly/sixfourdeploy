@@ -8,8 +8,8 @@ android {
         applicationId "com.npelly.sixfourdeploy"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 3
-        versionName "0.03"
+        versionCode 4
+        versionName "0.4"
     }
     buildTypes {
         release {

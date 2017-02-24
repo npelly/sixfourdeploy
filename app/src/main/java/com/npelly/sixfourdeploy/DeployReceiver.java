@@ -14,7 +14,7 @@ public class DeployReceiver extends BroadcastReceiver {
 
         int result = intent.getIntExtra(PackageInstaller.EXTRA_STATUS,
                 PackageInstaller.STATUS_FAILURE);
-        // String packageName = intent.getStringExtra(PackageInstaller.EXTRA_PACKAGE_NAME);
+        String packageName = intent.getStringExtra(PackageInstaller.EXTRA_PACKAGE_NAME);
 
         switch (result) {
             case PackageInstaller.STATUS_PENDING_USER_ACTION:
@@ -22,7 +22,15 @@ public class DeployReceiver extends BroadcastReceiver {
                 Base.get().getContext().startActivity((Intent) intent.getParcelableExtra(Intent.EXTRA_INTENT));
                 break;
             case PackageInstaller.STATUS_SUCCESS:
-                Base.logd("Successful install");
+                Base.logd("successful install of %s", packageName);
+
+                Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+                if (launchIntent != null) {
+                    context.startActivity(launchIntent);
+                } else {
+                    Base.logd("failed to auto-launch %s", packageName);
+                }
+
                 break;
             case PackageInstaller.STATUS_FAILURE_ABORTED:
                 Base.logd("installation cancelled by user");

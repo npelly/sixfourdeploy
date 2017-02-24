@@ -15,8 +15,6 @@ This only works across WIFI (or private networks) for now. The APK is not copied
 is streamed directly to your device over TCP.
 
 ### FEATURE REQUESTS / BUGS
-- F1: start enabled
-- F1: Launch app after install
 - F1: Graceful failure on public networks
 - F1: Graceful error messages in send.py for common connection failures
 - F1: Custom Icon & Rebrand
@@ -27,10 +25,15 @@ is streamed directly to your device over TCP.
 - F2: installation history UI
 
 ### CHANGELOG
-v0.03
+v0.4
+- Auto-launch installed app.
+- Start listening by default.
+- Fix some reliability bugs.
+
+v0.3
 - Ongoing notification when active.
 
-v0.02
+v0.2
 - P2P only (phone on WIFI, computer on same network).
 - Shortcode connections.
 - send.py to push from computer.
