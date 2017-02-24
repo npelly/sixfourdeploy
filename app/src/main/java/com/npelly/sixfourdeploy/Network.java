@@ -29,7 +29,8 @@ public class Network {
     private boolean cancelListening = false;
     private byte[] ip;
     private final int port = 12364;
-    private Callback callback;
+    private Callback callback1;
+    private Callback callback2;
     private ServerSocket serverSocket;
 
     public static final String ACTION_INSTALL_UPDATE = "com.npelly.ACTION_INSTALL_UPDATE";
@@ -38,8 +39,11 @@ public class Network {
 
     }
 
-    public void setCallback(Callback callback) {
-        this.callback = callback;
+    public void setCallback1(Callback callback) {
+        this.callback1 = callback;
+    }
+    public void setCallback2(Callback callback) {
+        this.callback2 = callback;
     }
 
     public static String ipAddressToString(byte[] ip) {
@@ -90,8 +94,11 @@ public class Network {
         listening = true;
         cancelListening = false;
         ip = getIpAddress();
-        if (callback != null) {
-            callback.updateListening(listening, getStatus());
+        if (callback1 != null) {
+            callback1.updateListening(listening, getStatus());
+        }
+        if (callback2 != null) {
+            callback2.updateListening(listening, getStatus());
         }
 
 
@@ -134,8 +141,11 @@ public class Network {
                     Base.logd(e.toString());
                 }
                 listening = false;
-                if (callback != null) {
-                    callback.updateListening(listening, getStatus());
+                if (callback1 != null) {
+                    callback1.updateListening(listening, getStatus());
+                }
+                if (callback2 != null) {
+                    callback2.updateListening(listening, getStatus());
                 }
                 Base.logd("stopped");
             }

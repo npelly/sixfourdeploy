@@ -8,6 +8,7 @@ import android.content.pm.PackageInstaller;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Looper;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.ScrollView;
@@ -44,7 +45,7 @@ public class MainActivity extends android.app.Activity implements TextOutput.Cal
         super.onResume();
         Base.logv("MainActivity onResume()");
         Base.get().getTextOutput().setCallback(this);
-        Base.get().getNetwork().setCallback(this);
+        Base.get().getNetwork().setCallback1(this);
         debugTextView.setText(Base.get().getTextOutput().getText());
         fabGreen = Base.get().getNetwork().isListening();
         updateListening(fabGreen, Base.get().getNetwork().getStatus());
@@ -56,7 +57,7 @@ public class MainActivity extends android.app.Activity implements TextOutput.Cal
         Base.logv("MainActivity onPause()");
 
         Base.get().getTextOutput().setCallback(null);
-        Base.get().getNetwork().setCallback(null);
+        Base.get().getNetwork().setCallback1(null);
     }
 
     @Override
@@ -88,7 +89,7 @@ public class MainActivity extends android.app.Activity implements TextOutput.Cal
     }
 
     /** Callback for change in listening status.
-     * Can be caleld on any thread */
+     * Can be called on any thread */
     @Override
     public void updateListening(final boolean isListening, final String status) {
         runOnUiThread(new Runnable() {
