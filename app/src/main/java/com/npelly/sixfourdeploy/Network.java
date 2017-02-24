@@ -24,7 +24,6 @@ public class Network {
         void updateListening(boolean isListening, String status);
     }
 
-
     private boolean listening = false;
     private boolean cancelListening = false;
     private byte[] ip;

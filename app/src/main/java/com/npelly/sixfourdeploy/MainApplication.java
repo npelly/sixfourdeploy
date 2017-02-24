@@ -17,6 +17,8 @@ public class MainApplication extends Application implements Network.Callback {
         Base.logd(getPackageName() + " " + getVersionString());
 
         Base.get().getNetwork().setCallback2(this);
+
+        Base.get().getNetwork().startListen();
     }
 
     private String getVersionString() {
