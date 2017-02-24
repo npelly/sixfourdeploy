@@ -7,7 +7,7 @@
 2. Note the _case-sensitive_ SHORTCODE printed by the app. This is used to identify your device.
 
 ### PUSHING APKs
-```     ./send.py SHORTCODE APK```
+```./push.py SHORTCODE APK```
 
 That's it :-)
 
@@ -15,8 +15,6 @@ This only works across WIFI (or private networks) for now. The APK is not copied
 is streamed directly to your device over TCP.
 
 ### FEATURE REQUESTS / BUGS
-- F1: Graceful failure on public networks
-- F1: Graceful error messages in send.py for common connection failures
 - F1: Custom Icon & Rebrand
 - B2: Fails if port is busy (for example, duplicate work profile instance)
 - F2: Public networks & NAT support w/ hole punching
@@ -25,6 +23,9 @@ is streamed directly to your device over TCP.
 - F2: installation history UI
 
 ### CHANGELOG
+- Rename send.py to push.py and improve error handling
+- Nicer UI when not on WIFI.
+
 v0.4
 - Auto-launch installed app.
 - Start listening by default.

@@ -31,6 +31,7 @@ public class Network {
     private Callback callback1;
     private Callback callback2;
     private ServerSocket serverSocket;
+    private String status = "OFF";
 
     public static final String ACTION_INSTALL_UPDATE = "com.npelly.ACTION_INSTALL_UPDATE";
 
@@ -54,7 +55,7 @@ public class Network {
         return s.toString();
     }
 
-    public static byte[] getIpAddress() {
+    public static byte[] getWifiIpAddress() {
         WifiManager wm = (WifiManager) Base.get().getContext().getSystemService(Context.WIFI_SERVICE);
         int ipInt = wm.getConnectionInfo().getIpAddress();
         byte[] ip = new byte[4];
@@ -88,18 +89,30 @@ public class Network {
         }
     }
 
+    private void doCallbacks() {
+        if (callback1 != null) {
+            callback1.updateListening(listening, status);
+        }
+        if (callback2 != null) {
+            callback2.updateListening(listening, status);
+        }
+    }
+
     public void startListen() {
         if (listening) return;
         listening = true;
         cancelListening = false;
-        ip = getIpAddress();
-        if (callback1 != null) {
-            callback1.updateListening(listening, getStatus());
-        }
-        if (callback2 != null) {
-            callback2.updateListening(listening, getStatus());
+        ip = getWifiIpAddress();
+        if (ip[0] == 0) {
+            Base.logd("WIFI not available");
+            listening = false;
+            status = "Connect to WIFI";
+            doCallbacks();
+            return;
         }
 
+        status = Shortcode.encode(ip, port);
+        doCallbacks();
 
         new Thread() {
             @Override
@@ -140,23 +153,15 @@ public class Network {
                     Base.logd(e.toString());
                 }
                 listening = false;
-                if (callback1 != null) {
-                    callback1.updateListening(listening, getStatus());
-                }
-                if (callback2 != null) {
-                    callback2.updateListening(listening, getStatus());
-                }
+                status = "OFF";
+                doCallbacks();
                 Base.logd("stopped");
             }
         }.start();
     }
 
     public String getStatus() {
-        if (!listening) {
-            return "OFF";
-        } else {
-            return Shortcode.encode(ip, port);
-        }
+        return status;
     }
 
     private static IntentSender createIntentSender(Context context, int sessionId) {
