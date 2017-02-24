@@ -1,6 +1,8 @@
 # sixfourdeploy
 
-*Push Android APKs to your device over WIFI.*
+*Install Android APKs over WIFI.*
+
+Works on any production device, no root required.*
 
 ### SETUP
 1. Install & run on your Android device (the traditional way)
@@ -16,6 +18,7 @@ is streamed directly to your device over TCP.
 
 ### FEATURE REQUESTS / BUGS
 - F1: Custom Icon & Rebrand
+- F1: adb shell setprop persist.service.adb.tcp.port 5555  ??
 - B2: Fails if port is busy (for example, duplicate work profile instance)
 - F2: Public networks & NAT support w/ hole punching
 - F2: UI (Snackbar?) to walk-through "Unknown Sources" Android Settings
