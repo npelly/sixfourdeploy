@@ -1,21 +1,20 @@
 # sixfourdeploy
 
-*Push Android APK to your device over WIFI.*
+*Push Android APKs to your device over WIFI.*
 
-__SETUP__
+### SETUP
 1. Install & run on your Android device (the traditional way)
 2. Note the _case-sensitive_ SHORTCODE printed by the app. This is used to identify your device.
 
-__PUSHING APKs__
-   `     ./send.py SHORTCODE APK`
+### PUSHING APKs
+```     ./send.py SHORTCODE APK```
 
 That's it :-)
 
 This only works across WIFI (or private networks) for now. The APK is not copied to the cloud, it
 is streamed directly to your device over TCP.
 
-__FEATURE REQUESTS / BUGS__
-- B1: Install fails if activity was swiped away.
+### FEATURE REQUESTS / BUGS
 - F1: start enabled
 - F1: Launch app after install
 - F1: Graceful failure on public networks
@@ -27,7 +26,7 @@ __FEATURE REQUESTS / BUGS__
 - F2: AVD / Android Studio integration
 - F2: installation history UI
 
-__CHANGELOG__
+### CHANGELOG
 v0.03
 - Ongoing notification when active.
 

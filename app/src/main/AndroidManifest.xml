@@ -27,7 +27,16 @@
         <service
             android:name=".DeployService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
+
+        <receiver
+            android:name=".DeployReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.npelly.ACTION_INSTALL_UPDATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

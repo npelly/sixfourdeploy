@@ -36,8 +36,6 @@ public class MainActivity extends android.app.Activity implements TextOutput.Cal
         fab =(FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(this);
-
-        registerReceiver(installReceiver, new IntentFilter(Network.ACTION_INSTALL_UPDATE));
     }
 
     @Override
@@ -64,8 +62,6 @@ public class MainActivity extends android.app.Activity implements TextOutput.Cal
     protected void onDestroy() {
         super.onDestroy();
         Base.logv("MainActivity onDestroy()");
-
-        unregisterReceiver(installReceiver);
     }
 
     /** can be called on any thread */
@@ -107,8 +103,6 @@ public class MainActivity extends android.app.Activity implements TextOutput.Cal
                 fabGreen = isListening;
             }
         });
-
-
     }
 
     /** Callback for fab press */
@@ -120,33 +114,4 @@ public class MainActivity extends android.app.Activity implements TextOutput.Cal
             Base.get().getNetwork().startListen();
         }
     }
-
-    private BroadcastReceiver installReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (!Network.ACTION_INSTALL_UPDATE.equals(intent.getAction())) {
-                return;
-            }
-
-            int result = intent.getIntExtra(PackageInstaller.EXTRA_STATUS,
-                    PackageInstaller.STATUS_FAILURE);
- //           String packageName = intent.getStringExtra(PackageInstaller.EXTRA_PACKAGE_NAME);
-
-            switch (result) {
-                case PackageInstaller.STATUS_PENDING_USER_ACTION:
-                    Base.logd("need user confirmation...");
-                    startActivity((Intent) intent.getParcelableExtra(Intent.EXTRA_INTENT));
-                    break;
-                case PackageInstaller.STATUS_SUCCESS:
-                    Base.logd("Successful install");
-                    break;
-                case PackageInstaller.STATUS_FAILURE_ABORTED:
-                    Base.logd("installation cancelled by user");
-                    break;
-                default:
-                    Base.logd("installation failed (reason: %d)", result);
-                    break;
-            }
-        }
-    };
 }
